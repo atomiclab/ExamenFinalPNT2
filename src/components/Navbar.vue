@@ -2,7 +2,7 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-1">
     <div class="container-fluid">
-      <RouterLink class="navbar-brand" to="/">Inicio</RouterLink>
+      <RouterLink class="navbar-brand" to="/inicio">Inicio</RouterLink>
 
       <button
         class="navbar-toggler"
@@ -19,8 +19,18 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/inicio" active-class="active"
+            <RouterLink class="nav-link" to="/consigna" active-class="active"
               >Consigna</RouterLink
+            >
+          </li>
+          <li class="nav-item">
+            <RouterLink class="nav-link" to="/respuestas" active-class="active"
+              >Respuestas</RouterLink
+            >
+          </li>
+          <li class="nav-item">
+            <RouterLink class="nav-link" to="/conversor" active-class="active"
+              >Conversor</RouterLink
             >
           </li>
         </ul>
