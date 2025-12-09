@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <header>
-          <h2>Examen Final- Gino Tubaro</h2>
+          <h2>Examen Final - Gino Tubaro</h2>
         </header>
       </div>
 

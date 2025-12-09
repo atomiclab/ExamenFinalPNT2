@@ -1,17 +1,11 @@
 <template>
     <div class="container mt-3">
       <h3>Examen Final - Gino Tubaro</h3>
-      <p class="mb-3">Debajo se podra acceder a la consigna del trabajo practico.</p>
-  
-      <div class="mb-3">
-        <a class="btn btn-primary btn-sm" href="/TP3.pdf" target="_blank" rel="noopener">
-          Abrir consigna en nueva pestaña
-        </a>
-      </div>
-  
+      <p class="mb-3">Debajo se podra acceder a la consigna del examen final Diciembre 2025.</p>
+   
       <div class="ratio ratio-16x9" style="min-height: 70vh;">
         <iframe
-          src="/TP3.pdf"
+          src="/final-1erDiciembre-2025.pdf"
           title="Consigna del examen"
           style="width: 100%; height: 100%; border: 1px solid #ddd; border-radius: 4px;"
         ></iframe>
