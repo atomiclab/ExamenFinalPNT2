@@ -1,3 +1,5 @@
+import servicioCotizacion from '@/servicios/cotizacion.js'
+
 export default {
   name: 'ConversorMoneda',
 
@@ -17,6 +19,10 @@ export default {
         montoEnPesos: false,
         cotizacionDolar: false,
       },
+      intervaloActualizacion: null,
+      servicioCotizacion: new servicioCotizacion(),
+      actualizacionAutomaticaHabilitada: false,
+      ultimaActualizacion: null,
     }
   },
 
@@ -69,6 +75,20 @@ export default {
       }
       return `$${this.valorConvertido.toFixed(2)}`
     },
+    fechaHoraUltimaActualizacion() {
+      if (!this.ultimaActualizacion) {
+        return 'No hay actualizaciones aún'
+      }
+      const fecha = new Date(this.ultimaActualizacion)
+      return fecha.toLocaleString('es-AR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      })
+    },
   },
 
   watch: {
@@ -76,7 +96,39 @@ export default {
   },
 
   methods: {
-
+    async actualizarCotizacion() {
+      const cotizacion = await this.servicioCotizacion.getCotizacionDolarOficialVendedor()
+      if (cotizacion !== null) {
+        this.cotizacionDolar = cotizacion
+        this.formDirty.cotizacionDolar = true
+        this.ultimaActualizacion = new Date()
+      }
+    },
+    iniciarActualizacionAutomatica() {
+      // Detener cualquier intervalo existente antes de crear uno nuevo
+      this.detenerActualizacionAutomatica()
+      // Actualizar inmediatamente
+      this.actualizarCotizacion()
+      // Luego actualizar cada 2 segundos
+      this.intervaloActualizacion = setInterval(() => {
+        this.actualizarCotizacion()
+      }, 2000)
+    },
+    detenerActualizacionAutomatica() {
+      if (this.intervaloActualizacion) {
+        clearInterval(this.intervaloActualizacion)
+        this.intervaloActualizacion = null
+      }
+    },
+    toggleActualizacionAutomatica() {
+      if (this.actualizacionAutomaticaHabilitada) {
+        // Si se habilita, iniciar la actualización automática
+        this.iniciarActualizacionAutomatica()
+      } else {
+        // Si se deshabilita, detener la actualización automática
+        this.detenerActualizacionAutomatica()
+      }
+    },
   },
 
   created() {
@@ -84,5 +136,6 @@ export default {
   mounted() {
   },
   unmounted() {
+    this.detenerActualizacionAutomatica()
   },
 }

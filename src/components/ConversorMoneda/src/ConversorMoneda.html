@@ -27,6 +27,23 @@
             <label for="cotizacionDolar" class="form-label"
               >Valor del dólar en $:</label
             >
+            <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center gap-2 mb-2">
+              <small class="text-muted">
+                Última actualización: {{ fechaHoraUltimaActualizacion }}
+              </small>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="actualizacionAutomatica"
+                  v-model="actualizacionAutomaticaHabilitada"
+                  @change="toggleActualizacionAutomatica"
+                />
+                <label class="form-check-label" for="actualizacionAutomatica">
+                  Actualización automática
+                </label>
+              </div>
+            </div>
             <input
               id="cotizacionDolar"
               v-model.number="cotizacionDolar"
@@ -36,6 +53,7 @@
               placeholder="Ingrese la cotización del dólar"
               min="0.01"
               step="0.01"
+              :disabled="actualizacionAutomaticaHabilitada"
               @input="formDirty.cotizacionDolar = true"
             />
             <div class="invalid-feedback" v-if="errorCotizacionDolar.mostrar">
