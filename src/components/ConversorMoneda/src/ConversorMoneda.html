@@ -1,0 +1,58 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h3 class="mb-0">ConversORT - Pesos a Dolares</h3>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="montoPesos" class="form-label">Ingrese monto:</label>
+            <input
+              id="montoPesos"
+              v-model.number="montoEnPesos"
+              type="number"
+              class="form-control"
+              :class="{ 'is-invalid': errorMontoEnPesos.mostrar, 'is-valid': formDirty.montoEnPesos && errorMontoEnPesos.ok }"
+              placeholder="Ingrese el monto en pesos"
+              min="0"
+              @input="formDirty.montoEnPesos = true"
+            />
+            <div class="invalid-feedback" v-if="errorMontoEnPesos.mostrar">
+              {{ errorMontoEnPesos.mensaje }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="cotizacionDolar" class="form-label"
+              >Valor del dólar en $:</label
+            >
+            <input
+              id="cotizacionDolar"
+              v-model.number="cotizacionDolar"
+              type="number"
+              class="form-control"
+              :class="{ 'is-invalid': errorCotizacionDolar.mostrar, 'is-valid': formDirty.cotizacionDolar && errorCotizacionDolar.ok }"
+              placeholder="Ingrese la cotización del dólar"
+              min="0.01"
+              step="0.01"
+              @input="formDirty.cotizacionDolar = true"
+            />
+            <div class="invalid-feedback" v-if="errorCotizacionDolar.mostrar">
+              {{ errorCotizacionDolar.mensaje }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Valor convertido USD:</label>
+            <div class="alert alert-success" role="alert">
+              <h4 class="mb-0">
+                {{ valorConvertidoFormateado }}
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
