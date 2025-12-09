@@ -1,4 +1,5 @@
 import servicioCotizacion from '@/servicios/cotizacion.js'
+import logo from '../assets/Logo.png'
 
 export default {
   name: 'ConversorMoneda',
@@ -23,6 +24,7 @@ export default {
       servicioCotizacion: new servicioCotizacion(),
       actualizacionAutomaticaHabilitada: false,
       ultimaActualizacion: null,
+      logo: logo,
     }
   },
 
